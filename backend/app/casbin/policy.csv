@@ -1,0 +1,45 @@
+# Casbin Policy Configuration
+# Format: p, role, resource, action
+# Format: g, user_role, role
+
+# ========================================
+# Role Hierarchy
+# ========================================
+g, user, user
+g, premium, user
+g, premium, premium
+g, admin, premium
+g, admin, admin
+
+# ========================================
+# User (Free Tier) Permissions
+# ========================================
+p, user, habits, read
+p, user, habits, create
+p, user, habits, update
+p, user, habits, delete
+p, user, completions, read
+p, user, completions, create
+p, user, completions, delete
+p, user, stats, read_basic
+p, user, profile, read
+p, user, profile, update
+
+# ========================================
+# Premium Permissions (Additional)
+# ========================================
+p, premium, habits, unlimited
+p, premium, stats, read_advanced
+p, premium, export, create
+p, premium, goals, custom
+p, premium, themes, custom
+p, premium, reminders, multiple
+
+# ========================================
+# Admin Permissions (Additional)
+# ========================================
+p, admin, users, read
+p, admin, users, update
+p, admin, users, delete
+p, admin, system, manage
+p, admin, analytics, read
