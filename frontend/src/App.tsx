@@ -1,80 +1,248 @@
 import { useState } from 'react'
-import { Flame } from 'lucide-react'
+import { Flame, Check, Settings, BarChart3 } from 'lucide-react'
+import {
+  Button,
+  Input,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  Badge,
+  Spinner,
+} from '@/components/ui'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState('')
+  const [inputError, setInputError] = useState('')
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setInputValue(value)
+    if (value.length > 0 && value.length < 3) {
+      setInputError('Habit name must be at least 3 characters')
+    } else {
+      setInputError('')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-50 to-brand-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-16">
-        <div className="flex flex-col items-center justify-center text-center space-y-8">
-          {/* Logo */}
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        {/* Header */}
+        <div className="flex flex-col items-center justify-center text-center space-y-6 mb-12">
           <div className="relative">
-            <Flame className="w-24 h-24 text-brand-500 animate-pulse" />
+            <Flame className="w-20 h-20 text-brand-500 animate-pulse" />
           </div>
-
-          {/* Welcome Text */}
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h1 className="text-display font-bold text-gray-900 dark:text-white">
-              Welcome to Encore
+              Encore Design System
             </h1>
-            <p className="text-h3 text-gray-600 dark:text-gray-300 max-w-2xl">
-              Build core habits. Again and again.
+            <p className="text-h3 text-gray-600 dark:text-gray-300">
+              Sprint 1: Component Library Showcase
             </p>
           </div>
+        </div>
 
-          {/* Status Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-12">
-            <div className="glass rounded-xl p-6 border border-brand-200 dark:border-gray-700">
-              <h3 className="text-h3 font-semibold text-gray-900 dark:text-white mb-2">
-                ✅ Frontend Ready
-              </h3>
-              <p className="text-small text-gray-600 dark:text-gray-400">
-                React + Vite + TypeScript + Tailwind CSS
-              </p>
-            </div>
+        {/* Component Showcase */}
+        <div className="grid gap-8">
+          {/* Buttons */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Buttons</CardTitle>
+              <CardDescription>
+                All button variants with different sizes and states
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex flex-wrap gap-3">
+                <Button>Default Button</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="destructive">Destructive</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="link">Link</Button>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Button size="sm">Small</Button>
+                <Button size="default">Default</Button>
+                <Button size="lg">Large</Button>
+                <Button size="icon">
+                  <Flame className="w-5 h-5" />
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Button disabled>Disabled</Button>
+                <Button>
+                  <Check className="w-4 h-4 mr-2" />
+                  With Icon
+                </Button>
+                <Button onClick={() => setCount(count + 1)}>
+                  Clicked {count} times 🔥
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
 
-            <div className="glass rounded-xl p-6 border border-brand-200 dark:border-gray-700">
-              <h3 className="text-h3 font-semibold text-gray-900 dark:text-white mb-2">
-                ✅ Backend Ready
-              </h3>
-              <p className="text-small text-gray-600 dark:text-gray-400">
-                FastAPI + PostgreSQL + Redis
-              </p>
-            </div>
+          {/* Inputs */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Inputs</CardTitle>
+              <CardDescription>
+                Text inputs with validation states
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Input
+                placeholder="Enter habit name..."
+                value={inputValue}
+                onChange={handleInputChange}
+                error={inputError}
+              />
+              <Input placeholder="Disabled input" disabled />
+              <Input type="password" placeholder="Password input" />
+            </CardContent>
+          </Card>
 
-            <div className="glass rounded-xl p-6 border border-brand-200 dark:border-gray-700">
-              <h3 className="text-h3 font-semibold text-gray-900 dark:text-white mb-2">
-                ✅ Auth Ready
-              </h3>
-              <p className="text-small text-gray-600 dark:text-gray-400">
-                Keycloak + Casbin RBAC
-              </p>
-            </div>
-          </div>
+          {/* Badges */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Badges</CardTitle>
+              <CardDescription>
+                Labels and status indicators
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                <Badge>Default</Badge>
+                <Badge variant="secondary">Secondary</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="error">Error</Badge>
+                <Badge variant="freeze">Freeze</Badge>
+                <Badge variant="outline">Outline</Badge>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Interactive Counter */}
-          <div className="mt-12">
-            <button
-              onClick={() => setCount((count) => count + 1)}
-              className="bg-brand-500 hover:bg-brand-600 active:scale-98 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Streak Counter: {count} 🔥
-            </button>
+          {/* Spinners */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Spinners</CardTitle>
+              <CardDescription>
+                Loading indicators in different sizes
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-8">
+                <Spinner size="sm" />
+                <Spinner size="default" />
+                <Spinner size="lg" />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Cards Demo */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Flame className="w-8 h-8 text-brand-500" />
+                  <Badge variant="success">Active</Badge>
+                </div>
+                <CardTitle>Morning Run</CardTitle>
+                <CardDescription>7 day streak</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-display font-bold text-brand-500">7</span>
+                  <Button size="sm">
+                    <Check className="w-4 h-4 mr-1" />
+                    Complete
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Settings className="w-8 h-8 text-gray-400" />
+                  <Badge variant="secondary">Free</Badge>
+                </div>
+                <CardTitle>Settings</CardTitle>
+                <CardDescription>Manage your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" className="w-full">
+                  Open Settings
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <BarChart3 className="w-8 h-8 text-brand-500" />
+                  <Badge variant="freeze">Premium</Badge>
+                </div>
+                <CardTitle>Statistics</CardTitle>
+                <CardDescription>Track your progress</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-small text-gray-600">
+                  <div className="flex justify-between">
+                    <span>Completion Rate:</span>
+                    <span className="font-semibold">85%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Best Streak:</span>
+                    <span className="font-semibold">21 days</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Next Steps */}
-          <div className="mt-16 max-w-3xl">
-            <h2 className="text-h2 font-bold text-gray-900 dark:text-white mb-6">
-              🚀 Next Steps
-            </h2>
-            <div className="text-left space-y-3 text-small text-gray-700 dark:text-gray-300">
-              <p>• <strong>Start services:</strong> <code className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">docker-compose up -d</code></p>
-              <p>• <strong>API docs:</strong> <a href="http://localhost:8000/docs" className="text-brand-500 hover:underline" target="_blank" rel="noopener noreferrer">http://localhost:8000/docs</a></p>
-              <p>• <strong>Keycloak admin:</strong> <a href="http://localhost:8080/admin" className="text-brand-500 hover:underline" target="_blank" rel="noopener noreferrer">http://localhost:8080/admin</a></p>
-              <p>• <strong>pgAdmin:</strong> <code className="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">docker-compose --profile dev up pgadmin</code></p>
-            </div>
-          </div>
+          <Card className="bg-brand-50 dark:bg-gray-800 border-brand-200 dark:border-gray-700">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Flame className="w-6 h-6 text-brand-500" />
+                Sprint 1 Progress
+              </CardTitle>
+              <CardDescription>
+                Foundation components are ready!
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Badge variant="success">✓</Badge>
+                <span className="text-sm">Button component with all variants</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="success">✓</Badge>
+                <span className="text-sm">Input component with validation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="success">✓</Badge>
+                <span className="text-sm">Card component system</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="success">✓</Badge>
+                <span className="text-sm">Badge and Spinner components</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">⏳</Badge>
+                <span className="text-sm">Backend models (User, Habit, Completion)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">⏳</Badge>
+                <span className="text-sm">Keycloak authentication integration</span>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
