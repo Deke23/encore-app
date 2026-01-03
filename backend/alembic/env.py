@@ -17,10 +17,10 @@ from app.config import settings
 from app.database import Base
 
 # Import all models here to ensure they are registered with Base.metadata
-# from app.models.user import User
-# from app.models.habit import Habit
-# from app.models.completion import Completion
-# from app.models.achievement import Achievement
+from app.models.user import User
+from app.models.habit import Habit
+from app.models.completion import Completion
+from app.models.achievement import Achievement
 
 # Alembic Config object
 config = context.config

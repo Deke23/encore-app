@@ -1,9 +1,9 @@
 """
 Application configuration using Pydantic Settings.
 """
-from typing import List
+from typing import List, Union
 from pydantic_settings import BaseSettings
-from pydantic import PostgresDsn, RedisDsn
+from pydantic import PostgresDsn, RedisDsn, field_validator
 
 
 class Settings(BaseSettings):
@@ -42,11 +42,19 @@ class Settings(BaseSettings):
     CASBIN_POLICY_ADAPTER: str = "postgresql"
 
     # CORS
-    CORS_ORIGINS: List[str] = [
+    CORS_ORIGINS: Union[List[str], str] = [
         "http://localhost:3000",
         "http://localhost:5173",
         "http://localhost",
     ]
+
+    @field_validator('CORS_ORIGINS', mode='before')
+    @classmethod
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from comma-separated string or list."""
+        if isinstance(v, str):
+            return [origin.strip() for origin in v.split(',')]
+        return v
 
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 60
