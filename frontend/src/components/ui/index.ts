@@ -15,3 +15,5 @@ export {
 } from "./card"
 export { Badge, badgeVariants, type BadgeProps } from "./badge"
 export { Spinner, spinnerVariants, type SpinnerProps } from "./spinner"
+export { Switch, type SwitchProps } from "./switch"
+export { AnimatedMascot } from "./animated-mascot"

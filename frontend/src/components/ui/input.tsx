@@ -19,7 +19,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             "disabled:cursor-not-allowed disabled:opacity-50",
             "dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100",
             error
-              ? "border-error-DEFAULT focus-visible:ring-error-DEFAULT"
+              ? "border-error focus-visible:ring-error"
               : "border-gray-300 dark:border-gray-700",
             className
           )}
@@ -27,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-sm text-error-DEFAULT">{error}</p>
+          <p className="mt-1.5 text-sm text-error">{error}</p>
         )}
       </div>
     )

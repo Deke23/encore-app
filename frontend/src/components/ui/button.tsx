@@ -10,7 +10,7 @@ const buttonVariants = cva(
         default: "bg-brand-500 text-white hover:bg-brand-600 shadow-md hover:shadow-lg",
         secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700",
         ghost: "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100",
-        destructive: "bg-error-DEFAULT text-white hover:bg-error-dark shadow-md hover:shadow-lg",
+        destructive: "bg-error text-white hover:bg-error-dark shadow-md hover:shadow-lg",
         outline: "border-2 border-gray-300 bg-transparent hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800",
         link: "text-brand-500 underline-offset-4 hover:underline",
       },
