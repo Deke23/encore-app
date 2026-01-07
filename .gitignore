@@ -54,6 +54,7 @@ lerna-debug.log*
 # Frontend build
 frontend/dist/
 frontend/dist-ssr/
+frontend/dev-dist/
 frontend/*.local
 
 # IDE
